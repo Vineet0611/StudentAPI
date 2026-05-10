@@ -59,8 +59,8 @@ namespace Infastructure.Repository.Base
 
         public async Task<int> UpdateAsync(T entity)
         {
-            _datacontext.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            return await _datacontext.SaveChangesAsync();
+            _datacontext.Set<T>().Attach(entity);
+            return 0;
         }
     }
 }

@@ -1,4 +1,5 @@
 using Azure.Storage.Blobs;
+using Common;
 using Core.Configs;
 using Cortex.Mediator.DependencyInjection;
 using FluentValidation;
@@ -6,6 +7,7 @@ using Hangfire;
 using Infastructure.Behaviour.RequestLoggingPipeline;
 using Infastructure.Behaviour.RequestValidatorPipeline;
 using Infastructure.Data;
+using Infastructure.Repository.Base;
 using Mapster;
 using MapsterMapper;
 using Microsoft.AspNet.OData.Extensions;
@@ -81,9 +83,9 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration.GetValue<String>("AppSettings:Jwt:Issuer"),
-        ValidAudience = builder.Configuration.GetValue<String>("AppSettings:Jwt:Audience"),
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<String>("AppSettings:Jwt:Key") ?? ""))
+        ValidIssuer = builder.Configuration.GetValue<String>("Jwt:Issuer"),
+        ValidAudience = builder.Configuration.GetValue<String>("Jwt:Audience"),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<String>("Jwt:Key") ?? ""))
     };
 });
 // REGISTERED CORTEX MEDIATOR
@@ -103,17 +105,17 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
 }
 );
-
-
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<PropagateHeaders>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 app.UseCors("corsapp");
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 app.UseRouting();
-app.UseRateLimiter();
 app.UseAuthorization();
 app.UseErrorHandlingMiddleware();
 app.UseSerilogRequestLogging();
