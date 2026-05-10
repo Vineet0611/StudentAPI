@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IsPackable>false</IsPackable>
+		<Configurations>Debug;Release;DebugTest</Configurations>
+		<RunNamingTestsOnBuild Condition="'$(RunNamingTestsOnBuild)' == ''">true</RunNamingTestsOnBuild>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='DebugTest'">
+		<!-- Skip post-build naming convention tests in this config -->
+		<RunNamingTestsOnBuild>false</RunNamingTestsOnBuild>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="coverlet.collector" Version="6.0.2" />
+		<PackageReference Include="FluentAssertions" Version="8.8.0" />
+		<PackageReference Include="FluentValidation" Version="12.1.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.3" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+		<PackageReference Include="NSubstitute" Version="5.3.0" />
+		<PackageReference Include="xunit" Version="2.9.3" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Core\Core.csproj" />
+		<ProjectReference Include="..\Infastructure\Infastructure.csproj" />
+		<ProjectReference Include="..\FoodFitness\StudentApi.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Using Include="Xunit" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Tests\Features\FCMNotificationFeatures\" />
+	  <Folder Include="Tests\Features\FeatureCategoryFeatures\" />
+	  <Folder Include="Tests\Features\InventoryFeatures\" />
+	  <Folder Include="Tests\Features\WaterTrackingFeatures\" />
+	  <Folder Include="Tests\Features\UserSubscriptionFeatures\" />
+	  <Folder Include="Tests\Features\UserFeatures\" />
+	  <Folder Include="Tests\Features\UOMFeatures\" />
+	  <Folder Include="Tests\Features\TransactionFeatures\" />
+	  <Folder Include="Tests\Features\TopicFeatures\" />
+	  <Folder Include="Tests\Features\TagFeatures\" />
+	  <Folder Include="Tests\Features\SubscriptionPlanFeatures\" />
+	  <Folder Include="Tests\Features\SubscriptionFeatures\" />
+	  <Folder Include="Tests\Features\SubCategoryFeatures\" />
+	  <Folder Include="Tests\Features\StoreFeatures\" />
+	  <Folder Include="Tests\Features\SlotFeatures\" />
+	  <Folder Include="Tests\Features\SeriesFeatures\" />
+	  <Folder Include="Tests\Features\PathLabUserFeatures\" />
+	  <Folder Include="Tests\Features\PathLabFeatures\" />
+	  <Folder Include="Tests\Features\PackageFeatures\" />
+	  <Folder Include="Tests\Features\OrderFeatures\" />
+	  <Folder Include="Tests\Features\NewsLetterFeatures\" />
+	  <Folder Include="Tests\Features\NewFolder\" />
+	  <Folder Include="Tests\Controllers\" />
+	</ItemGroup>
+	</Project>
