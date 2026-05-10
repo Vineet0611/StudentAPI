@@ -26,6 +26,7 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin().SetPreflightMaxAge(TimeSpan.FromMinutes(10));
 }));
 
+
 //Serilog
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
