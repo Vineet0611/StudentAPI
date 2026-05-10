@@ -1,6 +1,6 @@
 # 🎓 Student Management API
 
-A modern, robust, and scalable **.NET 9 Web API** designed for managing student records. Built with a focus on clean architecture, CQRS pattern, and secure authentication.
+A modern, robust, and scalable **.NET 9 Web API** designed for managing student records. Built with a focus on clean architecture, CQRS pattern, and secure authentication. The frontend angualar project is in this repository https://github.com/Vineet0611/StudentManagementWebApp
 
 ---
 
